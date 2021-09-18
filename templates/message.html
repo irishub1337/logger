@@ -1,0 +1,59 @@
+
+
+
+<div class="card">
+  <div class="card-body">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-12 col-md-1">
+          <img class="rounded-circle" src="{{ photo }}}" alt="" height="50" width="50">
+        </div>
+
+        <div class="col-12 col-md-11">
+         <h4 class="card-title"><a class="author-link" href="{{ link }}" target="_blank" target="_blank">{{ name }}</a></h4>
+         <h6 class="text-muted card-subtitle mb-2"><a class="message-date-link" href="{{ vk_link }}" target="_blank">{{ date }}</a></h6>
+        </div>
+
+        <div class="col-12 col-md-11 offset-md-1">
+          <p class="card-text">{{ text | safe  }}</p>
+        </div>
+
+        {% if reply_message %}
+        <div class="col-12 col-md-11 offset-md-1">
+          <div class="container">
+            <div class="row">
+              <div class="col-12"><small class="text-muted">Ответ на сообщение</small></div>
+            </div>
+            <div class="row border-start">
+              {{ reply_message | safe  }}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if fwd_messages %}
+          <div class="col-12 col-md-11 offset-md-1">
+            <div class="container">
+              <div class="row">
+                <div class="col-12"><small class="text-muted">Пересланные сообщения</small></div>
+              </div>
+              <div class="row border-start">
+                {% for fwd in fwd_messages %} {{ fwd|safe }} {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if attachments %}
+        <div class="col-12 text-center col-md-11 offset-md-1">
+          <div class="container text-center">
+            {% for attachment in attachments %}{{ attachment | safe }}{% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>

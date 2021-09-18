@@ -1,0 +1,23 @@
+.d-xxl-flex.justify-content-xxl-center.align-items-xxl-end.footer-dark {
+}
+
+ a {
+    text-decoration: none; /* Отменяем подчеркивание у ссылки */
+}
+
+ .author-link {
+     color: #8f8f8f;
+ }
+
+ .message-date-link {
+     margin-top: 0;
+    color: #d9d9d9;
+ }
+
+ .author-link:hover {
+     color: #1a1a1a;
+ }
+
+ .message-date-link:hover {
+    color: #1a1a1a;
+ }

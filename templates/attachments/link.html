@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-12">
+    <small class="text-muted">Ссылка</small>
+  </div>
+  <div class="col-12">
+    <a href="{{url}}" target="_blank">{{title}}</a>
+    <p>{{description}}</p>
+    {% if photo %}
+      <img class="img-fluid img-thumbnail" src="{{ photo.sizes[-1].url }}" alt="">
+    {% endif %}
+  </div>
+</div>

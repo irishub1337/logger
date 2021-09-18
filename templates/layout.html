@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}} | LRDL</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+  <script defer="" src="https://use.fontawesome.com/releases/v5.13.1/js/solid.js"
+          integrity="sha384-81RFXCmeESYg4G/uFGo6Tu/eeK3klw0oKItW3nPhi2BuryJcE4lkOkwWsW6jzoNz"
+          crossorigin="anonymous"></script>
+  <script defer="" src="https://use.fontawesome.com/releases/v5.13.1/js/regular.js"
+          integrity="sha384-omrmE/gvA72r1j409JaSn3V6w5f7Mx7GZpjB8xqS4nLwGpT7Zj2obev62Y9QcCZr"
+          crossorigin="anonymous"></script>
+  <script defer="" src="https://use.fontawesome.com/releases/v5.13.1/js/brands.js"
+          integrity="sha384-Ay9V1h0l5sywM7gJ5YvOc05QytfKqZAElRgqU5kPcIIUAUBqLOYwu9gnW6p5t/FN"
+          crossorigin="anonymous"></script>
+  <script defer="" src="https://use.fontawesome.com/releases/v5.13.1/js/fontawesome.js"
+          integrity="sha384-4NJBLvz0eHSgtSVDb+VOLh4cxmVluIBqCaNw97NvJAo18r+qV9pze1g4YnhB/X6Y"
+          crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/a3169779ca.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
+  <link rel="stylesheet" href="/static/css/styles.css">
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-light navbar-expand-md textdark text-dark navigation-clean">
+  <div class="container">
+    <a class="navbar-brand" href="#">LR Dialogs Logger</a>
+  </div>
+</nav>
+
+<div class="container" style="margin-bottom: 5px">
+  <div class="row">
+    <div class="col-12">
+      <h1>{{title}}</h1>
+    </div>
+    <div class="col-12">
+      <a href=".." class="btn btn-primary"><i class="fas fa-arrow-left"></i> К списку чатов</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form method="post" action="/{{chat_id}}" id="seacherForm">
+        <input type="hidden" id="page" name="page" value="{{ paginator.page }}">
+        <div class="input-group">
+          <span class="input-group-text">Поиск по сообщениям</span>
+          <input id="searchPhrase" name="searchPhrase" class="form-control" value="{{search_phrase}}" type="text">
+          <button class="btn btn-primary" type="submit">Найти</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <nav class="d-md-flex justify-content-md-end">
+    <ul class="pagination">
+      {% if paginator.has_prev %}
+        <li class="page-item"><a class="page-link" href="#" onclick="return toPrevPage({{ paginator.page }});" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+      {% endif %}
+      {% for page in paginator.xrange %}
+        <li class="page-item {% if paginator.page == page%}active{% endif %}"><a class="page-link" href="#" onclick="return toPage({{ page }});">{{ page }}</a></li>
+      {% endfor  %}
+      {% if paginator.has_next %}
+        <li class="page-item"><a class="page-link" href="#" onclick="return toNextPage({{ paginator.page }});" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      {% for message in messages %} {{message|safe}} {% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <nav class="d-md-flex justify-content-md-end">
+    <ul class="pagination">
+      {% if paginator.has_prev %}
+        <li class="page-item"><a class="page-link" href="#" onclick="return toPrevPage({{ paginator.page }});" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+      {% endif %}
+      {% for page in paginator.xrange %}
+        <li class="page-item {% if paginator.page == page%}active{% endif %}"><a class="page-link" href="#" onclick="return toPage({{ page }});">{{ page }}</a></li>
+      {% endfor  %}
+      {% if paginator.has_next %}
+        <li class="page-item"><a class="page-link" href="#" onclick="return toNextPage({{ paginator.page }});" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+
+<script>
+  function toPage(pageNum) {
+      seacherForm = document.getElementById('seacherForm');
+      pageElement = document.getElementById('page');
+
+      pageElement.value = pageNum;
+      seacherForm.submit();
+
+      return false;
+  }
+
+  function toNextPage(page) {
+      return toPage(page + 1);
+  }
+
+  function toPrevPage(page) {
+      return toPage(page - 1);
+  }
+
+</script>
+
+</body>
+</html>

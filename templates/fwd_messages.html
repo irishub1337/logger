@@ -1,0 +1,43 @@
+<div class="row message" id="fwd-message-{{ peer_id }}-{{ conversation_message_id }}">
+
+  <div class="col-12 text-center text-md-start col-md-1">
+    <img class="rounded-circle" width="50" height="50" src="{{ photo }}" alt="">
+  </div>
+
+  <div class="col-12 text-center text-md-start col-md-9">
+    <a class="author-link" href="{{ link }}" target="_blank">{{ name }}</a>
+  </div>
+
+  <div class="col-12 text-center text-md-end col-md-2">
+    <small class="text-muted message-date-link">{{ date }}</small>
+  </div>
+
+  {% if text %}
+  <div class="col-12 col-md-11 offset-md-1">
+    {{ text | safe  }}
+  </div>
+  {% endif %}
+
+  {% if fwd_messages %}
+    <div class="col-12 col-md-11 offset-md-1">
+      <div class="container">
+        <div class="row">
+          <div class="col-12"><small class="text-muted">Пересланные сообщения</small></div>
+        </div>
+        <div class="row border-start">
+          {% for fwd in fwd_messages %} {{ fwd|safe }} {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+
+  {% if attachments %}
+  <div class="col-12 text-center col-md-11 offset-md-1">
+    <div class="container text-center">
+      {% for attachment in attachments %}{{ attachment | safe }}{% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+</div>

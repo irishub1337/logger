@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Чаты | LRDL</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
+    <link rel="stylesheet" href="/static/css/data.css">
+    <link rel="stylesheet" href="/static/css/Header-Dark.css">
+    <link rel="stylesheet" href="/static/css/Navigation-Clean.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    <!-- Start: Navigation Clean -->
+    <nav class="navbar navbar-light navbar-expand-md textdark text-dark navigation-clean">
+        <div class="container">
+          <a class="navbar-brand" href="#">LR Dialogs Logger</a>
+        </div>
+    </nav>
+    <!-- End: Navigation Clean -->
+    <!-- Start: Seacher -->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="post">
+                    <div class="input-group">
+                      <span class="input-group-text">Поиск по диалогам</span>
+                      <input class="form-control" name="searchPhrase" id="searchPhrase" type="text" value="{{search_phrase}}">
+                      <button class="btn btn-primary" type="submit">Найти</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End: Seacher -->
+    <!-- Start: Content -->
+    <div class="container ">
+        {% for chat in chats %}
+          <div class="row">
+            <div class="col-12">
+              <div class="list-group">
+                <a href="/{{ chat.chat.id }}" class="list-group-item list-group-item-action">
+                  <div class="row">
+                <div class="col-12 col-md-1 text-center m-auto" style="padding-top: 5px;padding-bottom: 5px;">
+                  <img class="rounded-circle" loading="lazy" width="50" height="50" src="{{chat.chat.photo}}">
+                </div>
+                <div class="col-12 col-md-10 m-auto" style="padding-top: 5px;padding-bottom: 5px;">
+                  <span>{{chat.chat.title}}</span>
+                </div>
+                    <div class="col-12 col-md-1 m-auto" style="padding-top: 5px;padding-bottom: 5px;">
+                  <span>{{chat.count}} смс</span>
+                </div>
+              </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+    <!-- End: Content -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

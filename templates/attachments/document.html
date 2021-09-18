@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-12">
+    <small class="text-muted">Документ</small>
+  </div>
+  <div class="col-12">
+    <a href="{{url}}" target="_blank">{{title}}.{{ext}} {{size}} Байт</a>
+    {% if preview.photo %}
+      <img class="img-fluid img-thumbnail" src="{{ preview.photo[-1].url }}" alt="">
+    {% endif %}
+    {% if preview.graffiti %}
+      <img class="img-fluid img-thumbnail" src="{{ preview.graffiti.src }}" alt="">
+    {% endif %}
+  </div>
+</div>
